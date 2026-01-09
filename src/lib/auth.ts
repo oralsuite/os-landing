@@ -35,5 +35,10 @@ export function isAuthenticated(): boolean {
 }
 
 export function redirectToDashboard(): void {
-  window.location.href = `${DASHBOARD_URL}/dashboard`;
+  const token = getToken();
+  if (token) {
+    window.location.href = `${DASHBOARD_URL}?token=${encodeURIComponent(token)}`;
+  } else {
+    window.location.href = DASHBOARD_URL;
+  }
 }
